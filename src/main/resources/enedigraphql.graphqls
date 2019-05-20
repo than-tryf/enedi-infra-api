@@ -1,0 +1,16 @@
+type EnediDatacenter {
+    dcid: ID!
+    name: String!
+    country: String
+    city: String
+    latitude: Float
+    longtitude: Float
+    dcPrefix: String
+}
+
+type Query {
+    datacentersAll: [EnediDatacenter]
+    datacenterById(dcid: String): EnediDatacenter
+}
+
+

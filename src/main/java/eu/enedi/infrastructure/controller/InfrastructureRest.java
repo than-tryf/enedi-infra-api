@@ -3,8 +3,11 @@ package eu.enedi.infrastructure.controller;
 
 import eu.enedi.infrastructure.dto.EnediDatacenterDto;
 import eu.enedi.infrastructure.dto.EnediDatacentersDto;
+import eu.enedi.infrastructure.dto.EnediRacksDto;
 import eu.enedi.infrastructure.dto.EnediServersDto;
+import eu.enedi.infrastructure.entities.enedi.EnediRack;
 import eu.enedi.infrastructure.services.DatacenterService;
+import eu.enedi.infrastructure.services.RacksService;
 import eu.enedi.infrastructure.services.ServersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
+
+
+// 52.59.7.20
 
 @RestController
 @CrossOrigin
@@ -24,6 +30,9 @@ public class InfrastructureRest {
 
     @Autowired
     private ServersService serversService;
+
+    @Autowired
+    private RacksService racksService;
 
     /**************************************************************
      *
@@ -82,6 +91,20 @@ public class InfrastructureRest {
     }
 
     //--------------------------------------------------------------------------------------------------------//
+
+
+    @CrossOrigin
+    @GetMapping(value = "/racks/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<EnediRacksDto> getAllRacks(Pageable p){
+
+        return racksService.getAllRacks(p);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/racks/dc/{dcid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<EnediDatacentersDto> getDatacenterRacks(@PathVariable UUID dcid, Pageable p){
+        return null;
+    }
 
 /*
 

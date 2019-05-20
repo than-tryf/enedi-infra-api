@@ -32,6 +32,16 @@ public class DatacenterService {
         this.consulClient = client;
     }
 
+    // GRAPHQL
+    public List<EnediDatacenter> getAllDatacentersList(){
+        return enediDatacenterRepository.findAll();
+    }
+
+    public EnediDatacenter getDcById(UUID dcid) {
+        return enediDatacenterRepository.findEnediDatacenterByDcid(dcid);
+    }
+
+    // REST
     public Page<EnediDatacentersDto> getAllDatacenters(Pageable p){
         Page<EnediDatacenter> edc = enediDatacenterRepository.findAll(p);
         Page<EnediDatacentersDto> dtoPage = edc.map(new Function<EnediDatacenter, EnediDatacentersDto>() {

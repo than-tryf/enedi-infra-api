@@ -1,9 +1,5 @@
 package eu.enedi.infrastructure.dto;
 
-import eu.enedi.infrastructure.entities.enedi.EnediDatacenter;
-import eu.enedi.infrastructure.entities.enedi.EnediRack;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 

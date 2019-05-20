@@ -1,45 +1,26 @@
-package eu.enedi.infrastructure.entities.enedi;
+package eu.enedi.infrastructure.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import eu.enedi.infrastructure.entities.enedi.EnediServer;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.UUID;
 
-
-@Entity
-@Table(name = "enedi_rack")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "rackId"
 )
-public class EnediRack implements Serializable {
+public class EnediRacksDto implements Serializable {
 
-    @Id
-    @GeneratedValue
     private UUID rackId;
 
     private String rackName;
 
-    @ManyToOne
-    @JoinColumn
-    private EnediDatacenter enediDatacenter;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JsonBackReference
     private Collection<EnediServer> enediServers;
-
-    public EnediRack() {
-    }
-
-    public EnediRack(String rackName, Collection<EnediServer> enediServers) {
-        this.rackName = rackName;
-        this.enediServers = enediServers;
-    }
 
     public UUID getRackId() {
         return rackId;
@@ -64,6 +45,4 @@ public class EnediRack implements Serializable {
     public void setEnediServers(Collection<EnediServer> enediServers) {
         this.enediServers = enediServers;
     }
-
-
 }
